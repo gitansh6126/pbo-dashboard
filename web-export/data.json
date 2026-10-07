@@ -1,0 +1,349 @@
+{
+  "report": {
+    "as_of": "2026-10-07",
+    "todos_open": 4,
+    "contacts": 2,
+    "goals": 1,
+    "clients": 1,
+    "pipeline_by_stage": {
+      "lead": 8000.0,
+      "negotiation": 25000.0
+    },
+    "pipeline_total": 33000.0,
+    "pipeline_weighted": 18300.0,
+    "approvals_pending": 1,
+    "cash_net_90d": 22000.0,
+    "scorecard_rows": 1,
+    "scorecard_on_target": 1,
+    "rocks": {
+      "total": 2,
+      "open": 1,
+      "done": 1
+    },
+    "cash_drivers": [
+      "Net Profit",
+      "Gross Margin",
+      "New Business Development",
+      "Overhead",
+      "Sources of Money",
+      "Reduced Operating Expenses",
+      "Debt Service",
+      "Equipment & Assets"
+    ]
+  },
+  "entities": {
+    "personal.contact": [
+      {
+        "name": "Aarav",
+        "phone": "+91-98xxxx123",
+        "company": "Freelance client",
+        "id": "p-co-1791316927-490c",
+        "status": "open",
+        "created": "2026-10-07",
+        "_module": "personal",
+        "_type": "contact",
+        "_id": "p-co-1791316927-490c"
+      },
+      {
+        "name": "Sara",
+        "phone": "+91-90xxxx456",
+        "email": "sara@example.com",
+        "id": "p-co-1791316927-359e",
+        "status": "open",
+        "created": "2026-10-07",
+        "_module": "personal",
+        "_type": "contact",
+        "_id": "p-co-1791316927-359e"
+      }
+    ],
+    "personal.todo": [
+      {
+        "title": "30-min daily MLT theory revision",
+        "owner": "Gitansh",
+        "priority": "high",
+        "id": "p-to-1791316927-9a51",
+        "status": "open",
+        "created": "2026-10-07",
+        "_module": "personal",
+        "_type": "todo",
+        "_id": "p-to-1791316927-9a51"
+      },
+      {
+        "title": "Groceries & meal prep for the week",
+        "owner": "Gitansh",
+        "priority": "medium",
+        "id": "p-to-1791316927-743a",
+        "status": "open",
+        "created": "2026-10-07",
+        "_module": "personal",
+        "_type": "todo",
+        "_id": "p-to-1791316927-743a"
+      },
+      {
+        "title": "CLI test task",
+        "owner": "Gitansh",
+        "id": "p-to-1791316953-810d",
+        "status": "open",
+        "created": "2026-10-07",
+        "_module": "personal",
+        "_type": "todo",
+        "_id": "p-to-1791316953-810d"
+      },
+      {
+        "title": "Study MLP (multilayer perceptron) practice",
+        "owner": "Gitansh",
+        "priority": "high",
+        "due": "2026-10-12",
+        "id": "p-to-1791316927-f89e",
+        "status": "open",
+        "created": "2026-10-07",
+        "_module": "personal",
+        "_type": "todo",
+        "_id": "p-to-1791316927-f89e"
+      }
+    ],
+    "personal.goal": [
+      {
+        "title": "Finish MLT theory syllabus",
+        "target": "full syllabus",
+        "deadline": "2026-12-15",
+        "progress": "60%",
+        "id": "p-go-1791316927-b7c9",
+        "status": "open",
+        "created": "2026-10-07",
+        "_module": "personal",
+        "_type": "goal",
+        "_id": "p-go-1791316927-b7c9"
+      }
+    ],
+    "personal.note": [
+      {
+        "title": "Course launch idea",
+        "tags": "business,growth",
+        "id": "p-no-1791316927-5ce7",
+        "status": "open",
+        "created": "2026-10-07",
+        "_module": "personal",
+        "_type": "note",
+        "_id": "p-no-1791316927-5ce7"
+      }
+    ],
+    "businessman.client": [
+      {
+        "name": "Rahul Traders",
+        "status": "active",
+        "wsp": "+91-99xxxx000",
+        "id": "b-cl-1791316927-077e",
+        "created": "2026-10-07",
+        "_module": "businessman",
+        "_type": "client",
+        "_id": "b-cl-1791316927-077e"
+      }
+    ],
+    "businessman.approval": [
+      {
+        "title": "Stripe payout setup fee",
+        "amount": "1500",
+        "status": "pending",
+        "kind": "opex",
+        "id": "b-ap-1791316927-6b9a",
+        "created": "2026-10-07",
+        "_module": "businessman",
+        "_type": "approval",
+        "_id": "b-ap-1791316927-6b9a"
+      }
+    ],
+    "businessman.deal": [
+      {
+        "title": "WhatsApp contact-sorter setup",
+        "client": "walk-in lead",
+        "value": "8000",
+        "stage": "lead",
+        "id": "b-de-1791316927-810d",
+        "status": "open",
+        "created": "2026-10-07",
+        "_module": "businessman",
+        "_type": "deal",
+        "_id": "b-de-1791316927-810d"
+      },
+      {
+        "title": "Inventory reports dashboard",
+        "client": "Rahul Traders",
+        "value": "25000",
+        "stage": "negotiation",
+        "owner": "Gitansh",
+        "id": "b-de-1791316927-7b96",
+        "status": "open",
+        "created": "2026-10-07",
+        "_module": "businessman",
+        "_type": "deal",
+        "_id": "b-de-1791316927-7b96"
+      }
+    ],
+    "business.process": [
+      {
+        "title": "New client onboarding",
+        "owner": "Gitansh",
+        "id": "b-pr-1791316927-2fe8",
+        "status": "open",
+        "created": "2026-10-07",
+        "_module": "business",
+        "_type": "process",
+        "_id": "b-pr-1791316927-2fe8"
+      }
+    ],
+    "business.cashflow": [
+      {
+        "driver": "Client invoices",
+        "amount": "25000",
+        "type": "in",
+        "period": "2026-10",
+        "id": "b-ca-1791316927-f29b",
+        "status": "open",
+        "created": "2026-10-07",
+        "_module": "business",
+        "_type": "cashflow",
+        "_id": "b-ca-1791316927-f29b"
+      },
+      {
+        "driver": "VPS + tools",
+        "amount": "3000",
+        "type": "out",
+        "period": "2026-10",
+        "id": "b-ca-1791316927-607b",
+        "status": "open",
+        "created": "2026-10-07",
+        "_module": "business",
+        "_type": "cashflow",
+        "_id": "b-ca-1791316927-607b"
+      }
+    ],
+    "business.scorecard": [
+      {
+        "metric": "Pipeline added (INR)",
+        "target": "30000",
+        "actual": "33000",
+        "period": "2026-W40",
+        "owner": "Gitansh",
+        "id": "b-sc-1791316927-8d25",
+        "status": "open",
+        "created": "2026-10-07",
+        "_module": "business",
+        "_type": "scorecard",
+        "_id": "b-sc-1791316927-8d25"
+      }
+    ],
+    "business.org": [
+      {
+        "seat": "Founder/CEO",
+        "owner": "Gitansh",
+        "roles": "strategy, sales, delivery",
+        "id": "b-or-1791316927-67b5",
+        "status": "open",
+        "created": "2026-10-07",
+        "_module": "business",
+        "_type": "org",
+        "_id": "b-or-1791316927-67b5"
+      },
+      {
+        "seat": "Operations",
+        "owner": "vacant",
+        "roles": "delivery, support",
+        "id": "b-or-1791316927-ac09",
+        "status": "open",
+        "created": "2026-10-07",
+        "_module": "business",
+        "_type": "org",
+        "_id": "b-or-1791316927-ac09"
+      }
+    ],
+    "ceo.vto": [
+      {
+        "element": "20-Year Vision",
+        "content": "A recognized data & AI consultancy from Sirsa.",
+        "id": "c-vt-1791316927-c60f",
+        "status": "open",
+        "created": "2026-10-07",
+        "_module": "ceo",
+        "_type": "vto",
+        "_id": "c-vt-1791316927-c60f"
+      }
+    ],
+    "ceo.decision": [
+      {
+        "title": "Launch ML course by Dec",
+        "made": "2026-10-07",
+        "options": [
+          "define the product and customers",
+          "set the business model / pricing",
+          "assign build tasks",
+          "assign marketing tasks",
+          "set a launch date + review"
+        ],
+        "owners": [
+          "op"
+        ],
+        "status": "open",
+        "id": "c-de-1791316927-01a4",
+        "created": "2026-10-07",
+        "_module": "ceo",
+        "_type": "decision",
+        "_id": "c-de-1791316927-01a4"
+      }
+    ],
+    "ceo.meeting": [
+      {
+        "title": "Q4 focus day",
+        "date": "2026-10-01",
+        "type": "l10",
+        "id": "c-me-1791316927-5eaa",
+        "status": "open",
+        "created": "2026-10-07",
+        "_module": "ceo",
+        "_type": "meeting",
+        "_id": "c-me-1791316927-5eaa"
+      }
+    ],
+    "ceo.issue": [
+      {
+        "title": "Delivery times slipping",
+        "desc": "Client revisions causing scope creep",
+        "flow": "ids",
+        "status": "open",
+        "id": "c-is-1791316927-66ac",
+        "created": "2026-10-07",
+        "_module": "ceo",
+        "_type": "issue",
+        "_id": "c-is-1791316927-66ac"
+      }
+    ],
+    "ceo.rock": [
+      {
+        "title": "Ship inventory reports MVP",
+        "owner": "Gitansh",
+        "outcome": "first paying user",
+        "quarter": "2026-Q4",
+        "id": "c-ro-1791316927-fadc",
+        "status": "done",
+        "created": "2026-10-07",
+        "updated": "2026-10-07",
+        "_module": "ceo",
+        "_type": "rock",
+        "_id": "c-ro-1791316927-fadc"
+      },
+      {
+        "title": "Relaunch productized course",
+        "owner": "Gitansh",
+        "outcome": "5 enrollments",
+        "quarter": "2026-Q4",
+        "id": "c-ro-1791316927-74af",
+        "status": "open",
+        "created": "2026-10-07",
+        "_module": "ceo",
+        "_type": "rock",
+        "_id": "c-ro-1791316927-74af"
+      }
+    ]
+  },
+  "generated": "2026-10-07"
+}

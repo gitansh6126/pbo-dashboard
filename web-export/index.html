@@ -1,0 +1,90 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PBO — CEO Dashboard</title>
+<style>
+:root{--bg:#0f1220;--card:#1a1e33;--ink:#e8eaf6;--mut:#9aa1c0;--acc:#7c6cff;--ok:#3ddc97;--warn:#ff9f45;--bad:#ff6b6b;}
+*{box-sizing:border-box}body{margin:0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--bg);color:var(--ink)}
+header{padding:22px 28px;background:linear-gradient(90deg,#161b36,#1a1e33);border-bottom:1px solid #2a2f52}
+header h1{margin:0;font-size:18px;letter-spacing:.5px;color:#fff}
+header .sub{color:var(--mut);font-size:12px;margin-top:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;padding:24px 28px}
+.card{background:var(--card);border:1px solid #2a2f52;border-radius:14px;padding:18px 20px}
+.card h2{margin:0 0 12px;font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--mut)}
+.kpi{font-size:30px;font-weight:700}.kpi small{font-size:12px;color:var(--mut);font-weight:400}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl td,.tbl th{padding:6px 4px;text-align:left;border-bottom:1px solid #262b49}
+.ok{color:var(--ok)}.warn{color:var(--warn)}.bad{color:var(--bad)}.acc{color:var(--acc)}
+.bar{height:8px;border-radius:6px;background:#2a2f52;overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,#7c6cff,#3ddc97)}
+.pill{display:inline-block;background:#262b49;border-radius:20px;padding:2px 10px;margin:2px;font-size:12px}
+.loading{padding:40px;text-align:center;color:var(--mut)}
+.error{padding:40px;text-align:center;color:var(--bad)}
+</style></head><body>
+<header><h1>◆ PBO — Personal | Business | CEO Operating System</h1>
+<div class="sub" id="sub">loading…</div></header>
+<div class="grid" id="grid" style="display:none"></div>
+<div class="loading" id="loading">Loading dashboard…</div>
+<div class="error" id="err" style="display:none"></div>
+<script>
+const STAGE_ORDER = ["lead","qualified","proposal","negotiation","won"];
+const STAGE_PROB = {"lead":0.1,"qualified":0.3,"proposal":0.5,"negotiation":0.7,"won":1.0};
+const CASH_DRIVERS = ["Net Profit","Gross Margin","New Business Development","Overhead",
+  "Sources of Money","Reduced Operating Expenses","Debt Service","Equipment & Assets"];
+
+async function load() {
+  try {
+    const resp = await fetch("data.json", {cache:"no-store"});
+    if (!resp.ok) throw new Error("HTTP " + resp.status);
+    const data = await resp.json();
+    render(data.report);
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("grid").style.display = "grid";
+    document.getElementById("sub").textContent =
+      "local-first · git-diffable markdown brain · as of " + data.report.as_of +
+      " · generated " + data.generated;
+  } catch (e) {
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("err").style.display = "block";
+    document.getElementById("err").textContent = "Failed to load data.json: " + e.message;
+  }
+}
+
+function render(r) {
+  const rockPct = Math.round(100 * r.rocks_done / Math.max(1, r.rocks_total));
+  let pipeTable = "<table class='tbl'>";
+  for (const st of STAGE_ORDER) {
+    if (r.pipeline_by_stage[st]) {
+      pipeTable += `<tr><td>${st}</td><td style="text-align:right">${Number(r.pipeline_by_stage[st]).toLocaleString()}</td></tr>`;
+    }
+  }
+  pipeTable += "</table>";
+  if (pipeTable === "<table class='tbl'></table>") pipeTable = "<span class='mut'>no deals yet</span>";
+
+  const drivers = CASH_DRIVERS.map(d => `<span class='pill'>${d}</span>`).join("");
+
+  document.getElementById("grid").innerHTML = `
+    <div class="card"><h2>Personal</h2>
+      <div class="kpi">${r.todos_open}<small> open todos</small></div>
+      <p><span class="pill">${r.contacts} contacts</span><span class="pill">${r.goals} goals</span></p>
+    </div>
+    <div class="card"><h2>Businessman</h2>
+      <div class="kpi acc">${Number(r.pipeline_total).toLocaleString()}<small> pipeline $${Number(r.pipeline_weighted).toLocaleString()} weighted</small></div>
+      <p><span class="pill">${r.clients} clients</span><span class="pill warn">${r.approvals_pending} approvals pending</span></p>
+    </div>
+    <div class="card"><h2>Business</h2>
+      <div class="kpi">${Number(r.cash_net_90d).toLocaleString()}<small> net cash 90d</small></div>
+      <p><span class="pill">${r.scorecard_on_target}/${r.scorecard_rows} scorecard on target</span></p>
+    </div>
+    <div class="card"><h2>CEO</h2>
+      <div class="kpi">${r.rocks_done}/${r.rocks_total}<small> rocks done</small></div>
+      <div class="bar"><i style="width:${rockPct}%"></i></div>
+      <p class="mut">${r.rocks_open} active</p>
+    </div>
+    <div class="card"><h2>Deal pipeline (weighted $${Number(r.pipeline_weighted).toLocaleString()})</h2>${pipeTable}</div>
+    <div class="card"><h2>Cash-flow drivers (ceos-cashflow)</h2>${drivers}</div>
+  `;
+}
+
+load();
+</script>
+</body></html>
