@@ -1,0 +1,50 @@
+name: Deploy PBO Dashboard to Cloudflare Pages
+
+on:
+  schedule:
+    - cron: "0 6 * * *"   # daily 06:00 UTC (11:30 IST)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate dashboard data
+        run: |
+          python3 -c "
+          import sys, json, datetime
+          sys.path.insert(0, 'src')
+          from pbo.core import Brain
+          from pbo.reports import full_report
+          b = Brain('scratch-brain')
+          r = full_report(b)
+          ents = {}
+          for rec in b.list():
+              k = f\"{rec['_module']}.{rec['_type']}\"
+              ents.setdefault(k, []).append(rec)
+          with open('web-export/data.json', 'w') as f:
+              json.dump({'report': r, 'entities': ents, 'generated': str(datetime.date.today())}, f, indent=2, default=str)
+          print('Generated:', r['as_of'], 'entities:', sum(len(v) for v in ents.values()))
+          "
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: pbo-dashboard
+          directory: ./web-export
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
